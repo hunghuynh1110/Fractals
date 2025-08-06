@@ -18,10 +18,10 @@ def comput_new_random_point(start):
     vector = (points[rand_location] - start)/2.0
     new_point = start + vector
     
-    return new_point. points[rand_location]
+    return new_point, points[rand_location]
 
 
-iterations = 20
+iterations = 2000
 
 plt.plot(np.real(unit_circle), np.imag(unit_circle), 'b-')
 plt.plot(np.real(points), np.imag(points), 'r')
@@ -29,7 +29,7 @@ plt.plot(np.real(start), np.imag(start), 'g.')
 
 next_point = start
 for i in range(iterations):
-    next_point, point = comput_new_random_point(next_point)
+    next_point, rand_location = comput_new_random_point(next_point)
     plt.plot(np.real(next_point), np.imag(next_point), 'k.')
     
 plt.show()
