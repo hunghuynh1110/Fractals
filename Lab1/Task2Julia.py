@@ -3,7 +3,7 @@ import numpy as np
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-Y, X = np.mgrid[-0.75:0.5:0.0005, -1.5:0.5:0.0005]
+Y, X = np.mgrid[-0.75:0.75:0.0005, -1.5:1.5:0.0005]
 x = torch.Tensor(X)
 y = torch.Tensor(Y)
 z = torch.complex(x, y)

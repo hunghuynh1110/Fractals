@@ -4,6 +4,7 @@ import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 Y, X = np.mgrid[0:1:0.0002, -0.5:0.5:0.0002]
+#Y, X = np.mgrid[-0.3:0.3:0.0001, -0.5:0.5:0.0001]
 
 x = torch.Tensor(X)
 y = torch.Tensor(Y)
