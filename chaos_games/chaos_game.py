@@ -21,7 +21,7 @@ def comput_new_random_point(start):
     return new_point, points[rand_location]
 
 
-iterations = 2000
+iterations = 10000
 
 plt.plot(np.real(unit_circle), np.imag(unit_circle), 'b-')
 plt.plot(np.real(points), np.imag(points), 'r')
