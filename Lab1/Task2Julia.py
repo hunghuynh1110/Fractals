@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("mps")
 
 Y, X = np.mgrid[-0.75:0.75:0.0005, -1.5:1.5:0.0005]
 x = torch.Tensor(X)
