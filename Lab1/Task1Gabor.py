@@ -14,9 +14,9 @@ y = torch.Tensor(Y)
 x = x.to(device)
 y = y.to(device)
 
-gaus = torch.exp(-(x**2+y**2)/2.0)
+gaus = torch.exp(-(x**2+y**2)/10.0)
 
-z = gaus * (torch.sin(3*x))
+z = gaus * (torch.sin(y + x))
 
 #plot
 import matplotlib.pyplot as plt

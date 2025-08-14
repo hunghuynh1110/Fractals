@@ -16,7 +16,7 @@ y = y.to(device)
 
 
 #compute Gaussian
-z = torch.sin(3*x) 
+z = torch.sin(y+x) 
 
 #plot
 import matplotlib.pyplot as plt
