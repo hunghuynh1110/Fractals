@@ -1,7 +1,10 @@
 import torch
 import numpy as np
+import time
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+start = time.time()
+
+device = torch.device("mps")
 
 Y, X = np.mgrid[0:1:0.0002, -0.5:0.5:0.0002]
 #Y, X = np.mgrid[-0.3:0.3:0.0001, -0.5:0.5:0.0001]
@@ -35,6 +38,8 @@ def processFractal(a):
   a = img
   a = np.uint8(np.clip(a , 0 , 255))
   return a
+
+print(time.time() - start)
 
 plt.imshow(processFractal(ns.cpu().numpy()))
 plt.tight_layout(pad = 0)
