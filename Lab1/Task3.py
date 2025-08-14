@@ -1,12 +1,20 @@
 import torch
 import matplotlib.pyplot as plt
 
+device = torch.device("mps")
+print("Running on:", device)
+
 
 def koch_snowflake(iterations, length=1.0):
     # Initial triangle vertices
     p0 = torch.tensor([0.0, 0.0])
     p1 = torch.tensor([length, 0.0])
     p2 = torch.tensor([length / 2.0, length * torch.sqrt(torch.tensor(3.0)) / 2.0])
+    
+    p0 = p0.to(device)
+    p1 = p1.to(device)
+    p2 = p2.to(device)
+    
 
     points = [p0, p1, p2, p0]  # Closing the loop by adding p0 again at the end
 
@@ -23,8 +31,9 @@ def koch_snowflake(iterations, length=1.0):
             # Create the peak of the bump
             angle = torch.atan2(vector[1], vector[0])
             length = torch.norm(vector) / 3
-            peak = p1 + torch.tensor([torch.cos(angle - torch.pi / 3) * length,
-                                      torch.sin(angle - torch.pi / 3) * length])
+            peak = p1 + torch.stack([torch.cos(angle - torch.pi / 3) * length,
+                                      torch.sin(angle - torch.pi / 3) * length]
+                                     )
             # Add the new segments
             new_points.extend([p_start, p1, peak, p2])
         new_points.append(points[-1])  # Append last point
@@ -35,9 +44,11 @@ def koch_snowflake(iterations, length=1.0):
 
 
 # Set up the iterations and draw the fractal
-iterations = 5
+iterations = 10
 points = koch_snowflake(iterations)
 
+#move points back to cpu before ploting them out
+points = points.to(torch.device("cpu"))
 # Plot the Koch snowflake
 plt.figure(figsize=(8, 8))
 plt.plot(points[:, 0].numpy(), points[:, 1].numpy(), color='blue')
